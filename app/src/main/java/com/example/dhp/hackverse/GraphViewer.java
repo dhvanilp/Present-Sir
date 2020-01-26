@@ -28,6 +28,9 @@ import java.util.ArrayList;
 public class GraphViewer extends AppCompatActivity {
     private PieChart chart;
     private Button notifyStudent;
+    private String MA;
+    private String TA;
+    private String EmailId;
 
 
     @Override
@@ -38,8 +41,9 @@ public class GraphViewer extends AppCompatActivity {
         notifyStudent = findViewById(R.id.notifyStudent);
 
         String RollNo = intent.getStringExtra("roll_no");
-        String MA = intent.getStringExtra("ma");
-        String TA = intent.getStringExtra("ta");
+        MA = intent.getStringExtra("ma");
+        TA = intent.getStringExtra("ta");
+        EmailId = intent.getStringExtra("email_id");
 //        Toast.makeText(getApplicationContext(), "This is the data:" + RollNo + ":" + MA + ":" + TA, Toast.LENGTH_SHORT).show();
         setTitle("Roll No: " + RollNo);
 
@@ -79,7 +83,7 @@ public class GraphViewer extends AppCompatActivity {
 
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
         l.setXEntrySpace(7f);
@@ -99,14 +103,14 @@ public class GraphViewer extends AppCompatActivity {
 
     }
 
-    private void sendMail() {
 
-        String mail = "dhvanilhparikh@gmail.com";
-        String message = "This is an end";
-        String subject = "This is a mail";
+    private void sendMail() {
+        String toMail = EmailId;
+        String message = "This is your current attendance status : " + Float.valueOf(MA) / Float.valueOf(TA) * 100;
+        String subject = "Attendance Status";
 
         //Send Mail
-        JavaMailAPI javaMailAPI = new JavaMailAPI(this,mail,subject,message);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, toMail, subject, message);
 
         javaMailAPI.execute();
 
@@ -138,7 +142,8 @@ public class GraphViewer extends AppCompatActivity {
 
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
+        SpannableString s = new SpannableString("");
+
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);

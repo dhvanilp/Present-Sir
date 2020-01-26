@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_image2"
     android:orientation="vertical"
     android:padding="12dp"
     tools:context="com.example.dhp.hackverse.MainActivity">
@@ -24,7 +23,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Groups"
-            android:textColor="#FFFFFF"
             android:textSize="40dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -36,7 +34,6 @@
         android:layout_height="0dp"
         android:layout_below="@+id/spacing"
         android:layout_weight="6"
-        android:background="#00ff6666"
         android:orientation="vertical">
 
 
@@ -72,8 +69,8 @@
             android:layout_margin="3dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:text="Your Account"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:text="Your Account" />
 
         <Button
             android:id="@+id/createPersongroup"

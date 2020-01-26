@@ -4,20 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.dhp.hackverse.GraphViewer"
-    >
+    tools:context="com.example.dhp.hackverse.GraphViewer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="STATUS "
+            android:textSize="40dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/attendanceGraph"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            />
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
 
         <Button
             android:id="@+id/notifyStudent"
-            android:layout_marginTop="600dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Notify Student" />
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="Notify Student"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
 
 </LinearLayout>

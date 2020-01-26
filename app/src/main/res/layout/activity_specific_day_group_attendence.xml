@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_image2"
     android:orientation="vertical"
     android:padding="5dp"
     tools:context="com.example.dhp.hackverse.MainActivity">
@@ -26,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Enter GroupId"
-                android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -36,8 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:hint="Group id"
-                android:textColorHint="@color/textColorHint"
-                android:textColor="@color/white" />
+                android:textColorHint="@color/textColorHint" />
 
         </LinearLayout>
 
@@ -54,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="Enter DATE"
-                android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -64,8 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColorHint="@color/textColorHint"
-                android:hint="YYYY-MM-DD"
-                android:textColor="@color/white" />
+                android:hint="YYYY-MM-DD" />
 
         </LinearLayout>
     </LinearLayout>
@@ -96,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="Student Roll"
-                android:textColor="@color/white"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -105,7 +99,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=" MA"
-                android:textColor="@color/white"
                 android:textSize="25dp"
                 android:textStyle="bold" />
         </LinearLayout>

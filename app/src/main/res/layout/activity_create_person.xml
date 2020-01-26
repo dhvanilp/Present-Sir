@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_image2"
     android:padding="5dp"
     android:orientation="vertical"
     tools:context="com.example.dhp.hackverse.CreatePerson">
@@ -22,7 +21,6 @@
             android:gravity="center"
             android:text="ADD PERSON"
             android:padding="10dp"
-            android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
 
@@ -34,7 +32,6 @@
             android:layout_margin="3dp"
             android:hint="Enter group name"
             android:textColorHint="@color/textColorHint"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="italic" />
 
@@ -47,7 +44,6 @@
             android:layout_margin="3dp"
             android:hint="Enter Name"
             android:textColorHint="@color/textColorHint"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="italic" />
 
@@ -59,7 +55,6 @@
             android:layout_margin="3dp"
             android:hint="Enter Roll Number"
             android:textColorHint="@color/textColorHint"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="italic" />
 
@@ -72,7 +67,6 @@
             android:hint="Enter Email Address"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/textColorHint"
-            android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="italic" />
 
@@ -91,7 +85,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:alpha="0.7"
-            android:src="@drawable/ph_add_image2" />
+            android:src="@drawable/ph_add_image" />
     </LinearLayout>
 
     <LinearLayout
@@ -105,7 +99,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Create NEW PERSON"
-            android:textColor="#FFFFFF" />
+            android:text="Create NEW PERSON" />
     </LinearLayout>
 </LinearLayout>

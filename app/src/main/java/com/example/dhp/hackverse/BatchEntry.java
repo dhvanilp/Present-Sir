@@ -1,13 +1,9 @@
 package com.example.dhp.hackverse;
 
-
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * API Contract for the Pets app.
- */
+
 public final class BatchEntry {
 
     public final static String rollNumber = "rollNumber";

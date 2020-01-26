@@ -19,12 +19,13 @@ public class TotalGroupAttendence extends AppCompatActivity {
     String rollnumber[];
     String ma[];
     String ta[];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_total_group_attendence);
 
-        groupid =findViewById(R.id.groupid);
+        groupid = findViewById(R.id.groupid);
         Button submit = findViewById(R.id.submitbutton);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,56 +36,55 @@ public class TotalGroupAttendence extends AppCompatActivity {
                 SQLiteDatabase db = dbHelper.getReadableDatabase();
 
 
-                Cursor cx = db.rawQuery("SELECT count(name) FROM sqlite_master where type = 'table'",null);
+                Cursor cx = db.rawQuery("SELECT count(name) FROM sqlite_master where type = 'table'", null);
                 cx.moveToFirst();
                 int counted = cx.getInt(0);
-                Log.v("Counted",counted+"");
-                String[] presentgroups = new String[counted-1];
+                Log.v("Counted", counted + "");
+                String[] presentgroups = new String[counted - 1];
 
-                Cursor cy = db.rawQuery("SELECT name FROM sqlite_master where type = 'table'",null);
+                Cursor cy = db.rawQuery("SELECT name FROM sqlite_master where type = 'table'", null);
                 cy.moveToFirst();
-                int i=0;
-                while(!cy.isAfterLast()){
-                    if(!cy.getString(0).equals("android_metadata"))
-                    {
+                int i = 0;
+                while (!cy.isAfterLast()) {
+                    if (!cy.getString(0).equals("android_metadata")) {
                         presentgroups[i] = cy.getString(0).trim();
-                        Log.v("name",cy.getString(0));
+                        Log.v("name", cy.getString(0));
                         i++;
                     }
                     cy.moveToNext();
                 }
-                int flag=0;
-                for(int u=0;u<presentgroups.length;u++){
-                    if(name.equals(presentgroups[u])){
-                        flag=1;
+                int flag = 0;
+                for (int u = 0; u < presentgroups.length; u++) {
+                    if (name.equals(presentgroups[u])) {
+                        flag = 1;
                     }
                 }
 
-                if(flag==0){
+                if (flag == 0) {
                     groupid.setError("No such group record present");
                     groupid.requestFocus();
                     return;
                 }
 
-                String query = "select rollNumber,markedAttendence,totalAttendence from "+ name;
+                String query = "select rollNumber,markedAttendence,totalAttendence from " + name;
 
                 String query2 = "select count(*) from " + name;
-                Cursor c1 = db.rawQuery(query2,null);
+                Cursor c1 = db.rawQuery(query2, null);
                 c1.moveToFirst();
                 int count = c1.getInt(0);
-                Log.v("countoftotalstudents",count+"");
-                rollnumber=new String[count];
-                ma=new String[count];
+                Log.v("countoftotalstudents", count + "");
+                rollnumber = new String[count];
+                ma = new String[count];
                 ta = new String[count];
-                Cursor c = db.rawQuery(query,null);
+                Cursor c = db.rawQuery(query, null);
                 c.moveToFirst();
-                int w=0;
-                while(!c.isAfterLast()){
-                    rollnumber[w]=c.getString(0);
-                    ma[w]=c.getInt(1)+"";
-                    ta[w]=c.getInt(2)+"";
+                int w = 0;
+                while (!c.isAfterLast()) {
+                    rollnumber[w] = c.getString(0);
+                    ma[w] = c.getInt(1) + "";
+                    ta[w] = c.getInt(2) + "";
                     w++;
-                    Log.v("Rollnumber",c.getString(0));
+                    Log.v("Rollnumber", c.getString(0));
                     c.moveToNext();
                 }
 
@@ -97,15 +97,15 @@ public class TotalGroupAttendence extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position,
                                             long id) {
                         Intent intent = new Intent(getApplicationContext(), GraphViewer.class);
-                        intent.putExtra("roll_no",rollnumber[position]);
-                        intent.putExtra("ma",ma[position]);
-                        intent.putExtra("ta",ta[position]);
+                        intent.putExtra("roll_no", rollnumber[position]);
+                        intent.putExtra("ma", ma[position]);
+                        intent.putExtra("ta", ta[position]);
+                        String groupId = groupid.getText().toString().trim();
+                        intent.putExtra("email_id",getEmailId(groupId,rollnumber[position]));
                         startActivity(intent);
                     }
                 });
                 rollnumber2.setAdapter(arrayAdapter);
-
-
 
 
                 ListView markedattendence = findViewById(R.id.ma_listview);
@@ -122,10 +122,22 @@ public class TotalGroupAttendence extends AppCompatActivity {
 
     }
 
+    private String getEmailId(String groupID, String rollNumber) {
+        AttendanceDbHelper dbHelper = new AttendanceDbHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query = "SELECT emailAddress from " + groupID + " WHERE rollNumber=" + rollNumber;
+        Cursor cx = db.rawQuery(query, null);
+        cx.moveToFirst();
+        String email = cx.getString(0);
+        Log.v("This is the email:", email);
+        return email;
+
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(getApplicationContext(),UserAccount.class);
+        Intent i = new Intent(getApplicationContext(), UserAccount.class);
         startActivity(i);
     }
 }

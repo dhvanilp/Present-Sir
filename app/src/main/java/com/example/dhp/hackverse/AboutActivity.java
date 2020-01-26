@@ -21,7 +21,7 @@ public class AboutActivity extends AppCompatActivity {
         about.append("6) In order to check what is the attendence marked just go to the homescreen and check the details in our account option\n");
         about.append("7) Remember the attendence is marked for the whole day so one day will carry one attendence\n\n\n");
         about.append(" This project can be further extended to far over the boundaries in order to make the india digitalised and not only in classrooms but also in offices and in other departments\n");
-        about.setEnabled(false);
+        about.setEnabled(true);
 
     }
 }

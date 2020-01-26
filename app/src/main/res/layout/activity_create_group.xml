@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_image2"
     android:orientation="vertical"
     tools:context="com.example.dhp.hackverse.MainActivity">
 
@@ -25,7 +24,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Create Group "
-            android:textColor="#FFFFFF"
             android:textSize="40dp"
             android:textStyle="bold" />
 
@@ -48,7 +46,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Enter Group Name :"
-            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <EditText
@@ -58,7 +55,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Group Name"
-            android:textColor="#FFFFFF"
             android:textColorHint="@color/textColorHint" />
         <View
             android:layout_width="match_parent"
@@ -73,7 +69,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Enter Username :"
-            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <EditText
@@ -83,8 +78,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:textColorHint="@color/textColorHint"
-            android:hint="username"
-            android:textColor="#FFFFFF" />
+            android:hint="username" />
         <View
             android:layout_width="match_parent"
             android:layout_height="30dp">
@@ -98,7 +92,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Enter Group Data:"
-            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <EditText
@@ -108,8 +101,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:textColorHint="@color/textColorHint"
-            android:hint="Description"
-            android:textColor="#FFFFFF" />
+            android:hint="Description" />
 
     </LinearLayout>
 
@@ -128,8 +120,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Create "
-            android:textColor="#FFFFFF" />
+
+            android:textColor="#FFFFFF"
+            android:text="Create " />
     </LinearLayout>
 
 
