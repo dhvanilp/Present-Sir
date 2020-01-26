@@ -102,6 +102,7 @@ public class TotalGroupAttendence extends AppCompatActivity {
                         intent.putExtra("ta", ta[position]);
                         String groupId = groupid.getText().toString().trim();
                         intent.putExtra("email_id",getEmailId(groupId,rollnumber[position]));
+                        intent.putExtra("group_id",groupid.getText().toString().trim());
                         startActivity(intent);
                     }
                 });

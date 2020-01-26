@@ -1,15 +1,14 @@
 package com.example.dhp.hackverse;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -22,16 +21,24 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class GraphViewer extends AppCompatActivity {
+    ArrayList<Date> dates;
+    Date date = new Date();
+    Calendar cal = Calendar.getInstance();
     private PieChart chart;
     private Button notifyStudent;
     private String MA;
     private String TA;
     private String EmailId;
-
+    private String GroupId;
+    private MaterialCalendarView calendarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,7 @@ public class GraphViewer extends AppCompatActivity {
         MA = intent.getStringExtra("ma");
         TA = intent.getStringExtra("ta");
         EmailId = intent.getStringExtra("email_id");
+        GroupId = intent.getStringExtra("group_id");
 //        Toast.makeText(getApplicationContext(), "This is the data:" + RollNo + ":" + MA + ":" + TA, Toast.LENGTH_SHORT).show();
         setTitle("Roll No: " + RollNo);
 
@@ -101,6 +109,101 @@ public class GraphViewer extends AppCompatActivity {
             }
         });
 
+
+        calendarView = findViewById(R.id.calendarView);
+        setCalendarHighlights(RollNo);
+
+    }
+
+    private void setCalendarHighlights(String RollNo) {
+        calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_NONE); // Removes onClick functionality
+
+        cal.add(Calendar.DATE, 0);
+
+//        calendarView.setDateSelected(CalendarDay.today(), true);
+//        calendarView.setDateSelected(CalendarDay.from(2020, 1, 25), true);
+//        calendarView.setDateSelected(CalendarDay.from(2020, 1, 26), true);
+
+        AttendanceDbHelper attendanceDbHelper = new AttendanceDbHelper(getApplicationContext());
+        SQLiteDatabase db = attendanceDbHelper.getWritableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + GroupId + " WHERE 0", null);
+        try {
+            String[] columnNames = c.getColumnNames();
+            Log.d("888888888------", columnNames[0]);
+            Log.d("888888888------", columnNames[1]);
+            Log.d("888888888------", columnNames[2]);
+            Log.d("888888888------", columnNames[3]);
+            Log.d("888888888------", columnNames[4]);
+            Log.d("888888888------", columnNames[5]);
+
+            int outer ;
+
+            for (outer = 5; outer < columnNames.length; outer++) {
+
+                String monthname = "";
+                String month0 = "";
+                String date = "";
+                String year = "";
+
+
+
+                for (int i = 0; i < Math.min(columnNames[outer].length(), 3); i++) {
+                    monthname += (columnNames[outer].charAt(i));
+                }
+
+                if (monthname.equals("jan")) {
+                    month0 = "01";
+                } else if (monthname.equals("feb")) {
+                    month0 = "02";
+                } else if (monthname.equals("mar")) {
+                    month0 = "03";
+                } else if (monthname.equals("apr")) {
+                    month0 = "04";
+                } else if (monthname.equals("may")) {
+                    month0 = "05";
+                } else if (monthname.equals("jun")) {
+                    month0 = "06";
+                } else if (monthname.equals("jul")) {
+                    month0 = "07";
+                } else if (monthname.equals("aug")) {
+                    month0 = "08";
+                } else if (monthname.equals("sep")) {
+                    month0 = "09";
+                } else if (monthname.equals("oct")) {
+                    month0 = "10";
+                } else if (monthname.equals("nov")) {
+                    month0 = "11";
+                } else {
+                    month0 = "12";
+                }
+                for (int i = 3; i < Math.min(columnNames[outer].length(), 5); i++) {
+                    date += columnNames[outer].charAt(i);
+                }
+                for (int i = 5; i < Math.min(columnNames[outer].length(), 9); i++) {
+                    year += columnNames[outer].charAt(i);
+                }
+
+                AttendanceDbHelper attendanceDbHelper1 = new AttendanceDbHelper(getApplicationContext());
+                SQLiteDatabase db1 = attendanceDbHelper.getWritableDatabase();
+                Cursor c0 = db.rawQuery("SELECT " + columnNames[outer] + " FROM " + GroupId + " WHERE rollNumber=" + RollNo, null);
+                c0.moveToFirst();
+                int status = c0.getInt(0);
+                if (status == 1) {
+                    calendarView.setDateSelected(CalendarDay.from(Integer.valueOf(year), Integer.valueOf(month0), Integer.valueOf(date)), true);
+                }
+
+
+            }
+//            jan262020
+//            Log.d("888888888------",columnNames[6]);
+//            Log.d("888888888------",columnNames[7]);
+
+        } finally {
+            c.close();
+        }
+
+
     }
 
 
@@ -108,7 +211,7 @@ public class GraphViewer extends AppCompatActivity {
         String toMail = EmailId;
         Float percentage = Float.valueOf(MA) / Float.valueOf(TA) * 100;
         String message = "This is your current attendance status : " + percentage;
-        if (percentage<30.00){
+        if (percentage < 30.00) {
             message = message + "\n WARNING! Your Attendance is low\n";
         }
         message = message + "\n\n\nAttendance Management Team\nBy BBB\n";
@@ -159,7 +262,7 @@ public class GraphViewer extends AppCompatActivity {
 
         int height = displayMetrics.heightPixels;
 
-        int offset = (int) (height * 0.65); /* percent to move */
+        int offset = (int) (height * 0.00); /* percent to move */
 
         LinearLayout.LayoutParams llParams =
                 (LinearLayout.LayoutParams) chart.getLayoutParams();
