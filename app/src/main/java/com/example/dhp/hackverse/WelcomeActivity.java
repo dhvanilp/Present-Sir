@@ -64,7 +64,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PrefManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
+//
+//        actual code is below one for the app,
+//        if (!prefManager.isFirstTimeLaunch()) {
+//        below line is used for demo purpose
+        if (prefManager.isFirstTimeLaunch()) {
             launchHomeScreen();
             finish();
         }
