@@ -1,6 +1,4 @@
-# Image Attendance System
-Image Attendance System is an online attendance system made as a part of CodeFunDo by MicroSoft.
-
+# Present-Sir
 This app aims at marking the attendance status of a class by just clicking  pictures thus conserving
 time and solving problems like proxy that are given by students.
 
